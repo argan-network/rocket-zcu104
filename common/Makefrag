@@ -145,8 +145,8 @@ arm-uboot:
 	then \
 	    cp soft_config/boards.cfg $(uboot_dir)/ ; \
 	fi;
-	#cp soft_config/zynq_$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
-	cp soft_config/xilinx_zynqmp_$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
+	cp soft_config/zynq_$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
+	#cp soft_config/xilinx_zynqmp_$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
 	# actually build
 	#cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- zynq_$(UBOOT_CONFIG)_config
 	#cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- xilinx_zynqmp_$(UBOOT_CONFIG)_revB_config
