@@ -143,10 +143,10 @@ set_property "top" "rocketchip_wrapper" $obj
 # Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {
   #Tuo change flow from 2015 to 2017
-  create_run -name synth_1 -part xczu7ev-ffvc1156-2-e -flow {Vivado Synthesis 2017} -strategy "Vivado Synthesis Defaults" -constrset constrs_1
+  create_run -name synth_1 -part xczu7ev-ffvc1156-2-e -flow {Vivado Synthesis 2021} -strategy "Vivado Synthesis Defaults" -constrset constrs_1
 } else {
   set_property strategy "Vivado Synthesis Defaults" [get_runs synth_1]
-  set_property flow "Vivado Synthesis 2017" [get_runs synth_1]
+  set_property flow "Vivado Synthesis 2021" [get_runs synth_1]
 }
 set obj [get_runs synth_1]
 set_property "needs_refresh" "1" $obj
@@ -154,10 +154,10 @@ set_property "part" "xczu7ev-ffvc1156-2-e" $obj
 
 # Create 'impl_1' run (if not found)
 if {[string equal [get_runs -quiet impl_1] ""]} {
-  create_run -name impl_1 -part xczu7ev-ffvc1156-2-e -flow {Vivado Implementation 2017} -strategy "Vivado Implementation Defaults" -constrset constrs_1 -parent_run synth_1
+  create_run -name impl_1 -part xczu7ev-ffvc1156-2-e -flow {Vivado Implementation 2021} -strategy "Vivado Implementation Defaults" -constrset constrs_1 -parent_run synth_1
 } else {
   set_property strategy "Vivado Implementation Defaults" [get_runs impl_1]
-  set_property flow "Vivado Implementation 2017" [get_runs impl_1]
+  set_property flow "Vivado Implementation 2021" [get_runs impl_1]
 }
 set obj [get_runs impl_1]
 set_property "needs_refresh" "1" $obj
