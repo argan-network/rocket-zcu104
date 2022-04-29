@@ -194,7 +194,7 @@ input UART_rxd;
         .ext_clk_in(host_clk)
         );
 
-  assign reset = !FCLK_RESET0_N || !mmcm_locked;
+  assign reset = !FCLK_RESET0_N;//|| !mmcm_locked;
 
   wire [31:0] mem_araddr;
   wire [31:0] mem_awaddr;
