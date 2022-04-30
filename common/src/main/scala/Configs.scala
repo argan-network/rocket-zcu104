@@ -48,6 +48,7 @@ class WithNMediumCores(n: Int) extends Config((site, here, up) => {
 })
 
 class DefaultConfig extends Config(
+  new WithExtMemSize(0x40000000L) ++
   new WithBootROM ++ new freechips.rocketchip.system.DefaultConfig)
 class DefaultMediumConfig extends Config(
   new WithBootROM ++ new WithNMediumCores(1) ++

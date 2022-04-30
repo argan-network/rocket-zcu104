@@ -3,23 +3,35 @@
 
 module rocketchip_wrapper
    (
-   UART_rxd,
-   UART_txd,
+    input                 sys_rst, //Common port for all controllers
+
+    input                   c0_sys_clk_p,
+    input                   c0_sys_clk_n,
+    output                  c0_ddr4_act_n,
+    output [16:0]            c0_ddr4_adr,
+    output [1:0]            c0_ddr4_ba,
+    output [1:0]            c0_ddr4_bg,
+    output [0:0]            c0_ddr4_cke,
+    output [0:0]            c0_ddr4_odt,
+    output [0:0]            c0_ddr4_cs_n,
+    output [0:0]                 c0_ddr4_ck_t,
+    output [0:0]                c0_ddr4_ck_c,
+    output                  c0_ddr4_reset_n,
+    inout  [7:0]            c0_ddr4_dm_n,
+    inout  [63:0]            c0_ddr4_dq,
+    inout  [7:0]            c0_ddr4_dqs_t,
+    inout  [7:0]            c0_ddr4_dqs_c,
+
+   // input UART_rxd,
+    //output UART_txd,
 `ifndef differential_clock
     clk);
 `else
-    SYSCLK_P,
-    SYSCLK_N);
+    input SYSCLK_P,
+    input SYSCLK_N);
 `endif
-
-input UART_rxd;
-  output UART_txd;
-`ifndef differential_clock
-  input clk;
-`else
-  input SYSCLK_P;
-  input SYSCLK_N;
-`endif
+    wire                  c0_init_calib_complete;
+    wire                  c0_data_compare_error;
 
   wire FCLK_RESET0_N;
   
@@ -191,7 +203,27 @@ input UART_rxd;
         .S_AXI_wstrb(S_AXI_wstrb),
         .S_AXI_wvalid(S_AXI_wvalid),
        
-        .ext_clk_in(host_clk)
+        .ext_clk_in(host_clk),
+
+        .sys_rst(sys_rst),
+        .c0_init_calib_complete(c0_init_calib_complete),
+        //.c0_data_compare_error(c0_data_compare_error),
+        .c0_sys_clk_p(c0_sys_clk_p),
+        .c0_sys_clk_n(c0_sys_clk_n),
+        .c0_ddr4_act_n(c0_ddr4_act_n),
+        .c0_ddr4_adr(c0_ddr4_adr),
+        .c0_ddr4_ba(c0_ddr4_ba),
+        .c0_ddr4_bg(c0_ddr4_bg),
+        .c0_ddr4_cke(c0_ddr4_cke),
+        .c0_ddr4_odt(c0_ddr4_odt),
+        .c0_ddr4_cs_n(c0_ddr4_cs_n),
+        .c0_ddr4_ck_t(c0_ddr4_ck_t),
+        .c0_ddr4_ck_c(c0_ddr4_ck_c),
+        .c0_ddr4_reset_n(c0_ddr4_reset_n),
+        .c0_ddr4_dm_n(c0_ddr4_dm_n),
+        .c0_ddr4_dq(c0_ddr4_dq),
+        .c0_ddr4_dqs_t(c0_ddr4_dqs_t),
+        .c0_ddr4_dqs_c(c0_ddr4_dqs_c)
         );
 
   assign reset = !FCLK_RESET0_N;//|| !mmcm_locked;
