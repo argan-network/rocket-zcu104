@@ -3,7 +3,7 @@
 
 module rocketchip_wrapper
    (
-    input                 sys_rst, //Common port for all controllers
+    //input                 sys_rst, //Common port for all controllers
 
     input                   c0_sys_clk_p,
     input                   c0_sys_clk_n,
@@ -205,7 +205,7 @@ module rocketchip_wrapper
        
         .ext_clk_in(host_clk),
 
-        .sys_rst(sys_rst),
+        //.sys_rst(sys_rst),
         .c0_init_calib_complete(c0_init_calib_complete),
         //.c0_data_compare_error(c0_data_compare_error),
         .c0_sys_clk_p(c0_sys_clk_p),

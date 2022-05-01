@@ -243,10 +243,6 @@ proc create_root_design { parentCell } {
    CONFIG.ASSOCIATED_BUSIF {S_AXI:M_AXI} \
  ] $ext_clk_in
   set interrupt [ create_bd_port -dir O -type intr interrupt ]
-  set sys_rst [ create_bd_port -dir I -type rst sys_rst ]
-  set_property -dict [ list \
-   CONFIG.POLARITY {ACTIVE_HIGH} \
- ] $sys_rst
 
   # Create instance: axi_interconnect_0, and set properties
   set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0 ]
@@ -895,9 +891,9 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   connect_bd_net -net ddr4_0_c0_init_calib_complete [get_bd_ports c0_init_calib_complete] [get_bd_pins ddr4_0/c0_init_calib_complete]
   connect_bd_net -net ext_clk_in_1 [get_bd_ports ext_clk_in] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_interconnect_1/ACLK] [get_bd_pins axi_interconnect_1/M00_ACLK] [get_bd_pins axi_interconnect_1/S00_ACLK] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/saxihp1_fpd_aclk]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_1/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
+  connect_bd_net -net proc_sys_reset_0_mb_reset [get_bd_pins ddr4_0/sys_rst] [get_bd_pins proc_sys_reset_0/mb_reset]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_interconnect_1/M00_ARESETN] [get_bd_pins axi_interconnect_1/S00_ARESETN] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net rst_ddr4_0_266M_peripheral_aresetn [get_bd_pins axi_interconnect_1/M01_ARESETN] [get_bd_pins ddr4_0/c0_ddr4_aresetn] [get_bd_pins rst_ddr4_0_266M/peripheral_aresetn]
-  connect_bd_net -net sys_rst_0_1 [get_bd_ports sys_rst] [get_bd_pins ddr4_0/sys_rst]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0 [get_bd_ports FCLK_RESET0_N] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins zynq_ultra_ps_e_0/pl_resetn0]
 
   # Create address segments

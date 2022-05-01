@@ -29,8 +29,8 @@ set_property -dict {PACKAGE_PIN F23 IOSTANDARD LVDS} [get_ports SYSCLK_P]
 #set_property PACKAGE_PIN C19 [get_ports UART_txd]
 #set_property IOSTANDARD LVCMOS18 [get_ports UART_txd]
 
-set_property PACKAGE_PIN C22 [ get_ports "sys_rst" ]
-set_property IOSTANDARD LVCMOS12 [ get_ports "sys_rst" ]
+#set_property PACKAGE_PIN C22 [ get_ports "sys_rst" ]
+#set_property IOSTANDARD LVCMOS12 [ get_ports "sys_rst" ]
 
 #set_property PACKAGE_PIN D24 [ get_ports "c0_init_calib_complete" ]
 #set_property IOSTANDARD LVCMOS12 [ get_ports "c0_init_calib_complete" ]
